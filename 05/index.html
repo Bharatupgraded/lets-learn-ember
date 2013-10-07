@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+		<head>
+			<meta charset="utf-8"/>
+			<title>Let's learn Ember .js</title>
+			<script src="js/jquery-1.9.1.js"></script>
+			<script src="js/handlebars-1.0.0.js"></script>
+			<script src="js/ember-1.0.0.js"></script>
+			<script>
+				window.App = Ember.Application.create();
+
+				var globalCounter = 0;
+				var Bookmark = Ember.Object.extend({
+					to_link: function() {
+						return "<a href='" + this.get("url") + "'>"
+						+ this.get("name")
+						+ "</a>";
+					},
+					formatted: function() {
+						return this.get("name") + " - " + this.get("url");
+					},
+					link: function() {
+						return this.to_link();
+					}.property("name", "url"),
+					updateCounter: Ember.observer(function() {
+						globalCounter += 1;
+						console.log("Global counter has increased to " + globalCounter);
+					}, "name")
+
+				});
+
+				var bookmark =  Bookmark.create({ name: "Tuts+ Premium", url: "http://tutsplus.com"});
+				bookmark.addObserver("url", function() {})
+			</script>
+		</head>
+	<body>
+		<script type="text/x-handlebars" data-template-name="index">
+			<h1>Welcome to Ember.js</h1>
+		</script>
+	</body>
+</html>
