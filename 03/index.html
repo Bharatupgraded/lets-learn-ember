@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+		<head>
+			<meta charset="utf-8"/>
+			<title>Let's learn Ember .js</title>
+			<script src="js/jquery-1.9.1.js"></script>
+			<script src="js/handlebars-1.0.0.js"></script>
+			<script src="js/ember-1.0.0.js"></script>
+			<script>
+				window.App = Ember.Application.create();
+
+				var Bookmark = Ember.Object.extend({
+					to_link: function() {
+						return "<a href='" + this.get("url") + "'>"
+						+ this.get("name")
+						+ "</a>";
+					}
+				});
+
+				Bookmark.reopen({
+					formatted: function() {
+						return this.get("name") + " - " + this.get("url");
+					}
+				})
+
+				var bookmark =  Bookmark.create({ name: "Tuts+ Premium", url: "http://tutsplus.com"});
+			</script>
+		</head>
+	<body>
+		<script type="text/x-handlebars" data-template-name="index">
+			<h1>Welcome to Ember.js</h1>
+		</script>
+	</body>
+</html>
